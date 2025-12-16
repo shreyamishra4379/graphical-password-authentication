@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Select Theme</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --accent: #00ffcc;
+      --glass-bg: rgba(25, 25, 25, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --white: #ffffff;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; font-family:"Poppins", sans-serif; }
+
+    html, body { height:100%; }
+
+    body {
+      background: url("/templates/pic1.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: var(--white);
+      display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+      text-align:center;
+    }
+
+    .nav-btn {
+      padding: 10px 25px; font-size:16px; border-radius:12px; border:none; cursor:pointer;
+      background: rgba(255,255,255,0.1); color:#fff; font-weight:600; transition:0.3s;
+    }
+    .nav-btn:hover { background: rgba(0,255,204,0.35); box-shadow: 0 0 10px rgba(0,255,204,0.4); }
+
+    /* Navbar */
+    .top-bar {
+      width:100%; display:flex; justify-content:flex-end; align-items:center; padding:15px 40px; gap:25px;
+      background: rgba(255,255,255,0.15); border-radius: 0 0 15px 15px; backdrop-filter: blur(14px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25); position: fixed; top:0; left:0; z-index:100;
+    }
+    .nav-text { color: var(--white); text-decoration:none; font-weight:600; font-size:16px; transition: color 0.2s ease; }
+    .nav-text:hover { color: var(--accent); }
+
+    /* Theme Selection */
+    .theme-container {
+      display:flex; align-items:center; justify-content:center; gap:40px;
+      margin-top:160px; background: var(--glass-bg); border:1px solid var(--glass-border);
+      border-radius:25px; box-shadow:0 14px 45px rgba(0,0,0,0.6); padding:60px 80px; max-width:850px; width:90%;
+      flex-wrap:wrap;
+    }
+
+    .theme-container img {
+      width:280px; height:auto; border-radius:15px;
+    }
+
+    .theme-box { text-align:center; flex:1; min-width:250px; }
+
+    h1 { color: var(--accent); font-size:36px; margin-bottom:25px; text-shadow:2px 2px 8px rgba(0,0,0,0.6); }
+
+    select {
+      padding:16px 20px; border-radius:12px; border:none; outline:none; background: rgba(255,255,255,0.15);
+      color:#fff; font-size:18px; margin-bottom:40px; width:100%; max-width:300px; text-align:center;
+    }
+
+    button {
+      padding:14px 40px; background: var(--accent); border:none; border-radius:28px; font-size:20px;
+      cursor:pointer; color:#111; font-weight:600; transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    button:hover { transform: translateY(-3px); filter: brightness(1.1); }
+
+    footer { margin-top:auto; padding:20px 0; font-size:14px; color: rgba(255,255,255,0.7); }
+
+    @media(max-width:800px) {
+      .theme-container { flex-direction:column; padding:40px 30px; }
+      .theme-container img { width:180px; margin-bottom:25px; }
+      h1 { font-size:28px; }
+      select { width:220px; }
+      button { font-size:18px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <div class="top-bar">
+    <a href="/home" class="nav-btn nav-text">Home</a>
+    <a href="/contact" class="nav-btn nav-text">Contact</a>
+  </div>
+
+  <!-- Theme Selection -->
+  <div class="theme-container">
+    <img src="/templates/myc.png" alt="Theme Illustration">
+
+    <div class="theme-box">
+      <h1>Personalize Your Experience</h1>
+      <p>Select a theme that suits your preference. Your choice will be applied immediately and remembered for future visits.</p>
+      <br />
+      <select id="theme-selector">
+        <option value="" disabled selected>Select a theme</option>
+        <option value="chocolates">Chocolates 🍫</option>
+        <option value="flowers">Flowers 🌸</option>
+        <option value="cars">Cars 🚗</option>
+        <option value="animals">Animals 🐶</option>
+      </select>
+      <br />
+      <button onclick="goToRegister()">Continue</button>
+    </div>
+  </div>
+
+  <footer>© 2025 Graphical Password Authentication</footer>
+
+  <script>
+    function goToRegister() {
+      const theme = document.getElementById("theme-selector").value;
+      if (!theme) {
+        alert("⚠️ Please select a theme before continuing!");
+        return;
+      }
+      // Save the theme to localStorage
+      localStorage.setItem("selectedTheme", theme);
+      // Redirect to register page
+      window.location.href = "/register";
+    }
+
+    // Optional: pre-select previous theme if user revisits
+    window.onload = () => {
+      const savedTheme = localStorage.getItem("selectedTheme");
+      if (savedTheme) {
+        document.getElementById("theme-selector").value = savedTheme;
+      }
+    };
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graphical Password Authentication - Contact</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --accent: #00ffcc;
+      --white: #ffffff;
+      --text-light: rgba(255,255,255,0.9);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url("/templates/pic1.jpg") repeat center center;
+      background-size: auto;
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content:"";
+      position:absolute;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.1); 
+      backdrop-filter: blur(4px);
+      z-index:0;
+    }
+
+    /* Navbar */
+    .top-bar {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 12px 25px;
+      gap: 20px;
+      margin: 20px auto;
+      background: rgba(0,0,0,0.35);
+      border-radius: 15px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-text { color: var(--white); text-decoration: none; font-weight:600; font-size:16px; transition: color 0.3s ease; }
+    .nav-text:hover { color: var(--accent); }
+
+    .nav-btn { padding:8px 20px; border-radius:25px; text-decoration:none; font-weight:600; font-size:14px; cursor:pointer; border:none; transition: transform .12s ease, filter .12s ease; }
+    .login-btn { background: var(--white); color:#111; }
+    .signup-btn { background: var(--accent); color:#111; }
+    .nav-btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+
+    /* Contact Section */
+    .contact-container {
+      max-width: 1100px; /* Increased width */
+      margin: 120px auto; /* More space from top */
+      padding: 70px 60px; /* Larger padding */
+      background: rgba(0,0,0,0.65);
+      border-radius: 25px;
+      backdrop-filter: blur(12px);
+      text-align: center;
+      position: relative;
+      z-index:1;
+    }
+
+    .contact-content {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .contact-image {
+      flex: 0 0 300px; /* Larger image container */
+    }
+
+    .contact-image img {
+      width: 100%;
+      border-radius: 20px;
+    }
+
+    .contact-text {
+      flex: 1;
+      min-width: 300px;
+      text-align: left;
+    }
+
+    .contact-text h1 {
+      font-size: 48px; /* Increased heading */
+      color: var(--accent);
+      margin-bottom: 25px;
+    }
+
+    .contact-text p {
+      font-size: 20px; /* Increased paragraph size */
+      color: var(--text-light);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .contact-text a {
+      display: inline-block;
+      margin: 8px 0;
+      font-size: 20px; /* Increased link size */
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-text a:hover { color: #00e0b8; }
+
+    @media(max-width:1024px){
+      .contact-container { padding: 60px 40px; }
+      .contact-image { flex: 0 0 250px; }
+      .contact-text h1 { font-size: 42px; }
+      .contact-text p, .contact-text a { font-size: 18px; }
+    }
+
+    @media(max-width:768px){
+      .contact-content { flex-direction: column; text-align: center; }
+      .contact-text { text-align: center; }
+      .contact-image { flex: 0 0 200px; }
+      .contact-text h1 { font-size: 36px; }
+      .contact-text p, .contact-text a { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="top-bar">
+    <a href="/home" class="nav-text">Home</a>
+    <a href="/contact" class="nav-text">Contact</a>
+    <a href="/login1" class="nav-btn login-btn">Login</a>
+    <a href="/signup" class="nav-btn signup-btn">Sign Up</a>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="contact-container">
+    <div class="contact-content">
+      <!-- Image on the left -->
+      <div class="contact-image">
+        <img src="/templates/img3.png" alt="Contact Image">
+      </div>
+
+      <!-- Text on the right -->
+      <div class="contact-text">
+        <h1>Contact Us</h1>
+        <p>If you have any questions, suggestions, or issues, feel free to reach out to us via the contact information below. We are committed to responding promptly and providing the best support for your graphical password experience.</p>
+        <a href="mailto:support@graphicalauth.com"><i class="fas fa-envelope"></i> Email: support@graphicalauth.com</a><br>
+        <a href="tel:+911234567890"><i class="fas fa-phone"></i> Phone: +91 9356760889</a>
+        <p>Address: 123, Graphical Auth Lane, Nagpur, India</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

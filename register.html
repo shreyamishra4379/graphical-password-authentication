@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register Graphical Password</title>
+
+  <!-- ✅ Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+
+    body {
+      min-height:100vh;
+      background: url("{{ url_for('serve_templates_file', filename='pic1.jpg') }}") repeat center center;
+      background-size: auto;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding:40px 20px;
+      color:#fff;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    body::before {
+      content:"";
+      position:absolute;
+      top:0; left:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.4);
+      z-index:0;
+    }
+
+    nav {
+      width:100%;
+      max-width:1200px;
+      background:rgba(0,0,0,0.55);
+      border-radius:15px;
+      padding:15px 30px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:40px;
+      box-shadow:0 0 10px rgba(0,255,204,0.25);
+      z-index:1;
+    }
+    nav h1 { font-size:28px; font-weight:700; color:#fff; }
+    nav button {
+      padding:10px 25px;
+      font-size:16px;
+      border-radius:12px;
+      border:none;
+      cursor:pointer;
+      background: rgba(255,255,255,0.1);
+      color:#fff;
+      font-weight:600;
+      transition:all 0.3s ease;
+    }
+    nav button:hover {
+      background: rgba(0,255,204,0.35);
+      box-shadow:0 0 10px rgba(0,255,204,0.4);
+    }
+
+    .page-heading {
+      font-size:34px;
+      text-align:center;
+      font-weight:700;
+      margin-bottom:10px;
+      color:#c1f0e3;
+      text-shadow:0 0 4px rgba(0,255,204,0.4), 0 0 8px rgba(0,255,204,0.3);
+      animation: subtleGlow 4s infinite alternate ease-in-out;
+      z-index:1;
+      position:relative;
+    }
+    @keyframes subtleGlow {
+      from { text-shadow: 0 0 4px rgba(0,255,204,0.3), 0 0 6px rgba(0,255,204,0.2); }
+      to { text-shadow: 0 0 8px rgba(0,255,204,0.45), 0 0 10px rgba(0,255,204,0.3); }
+    }
+
+    .page-subtitle {
+      font-size:18px;
+      margin-bottom:40px;
+      color:rgba(255,255,255,0.9);
+      text-align:center;
+      z-index:1;
+      position:relative;
+    }
+    .highlight {
+      color:#00ffcc;
+      font-weight:700;
+      background: rgba(0,255,204,0.1);
+      padding:2px 6px;
+      border-radius:6px;
+    }
+
+    .container {
+      width:100%;
+      max-width:1100px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.2);
+      box-shadow:0 8px 25px rgba(0,0,0,0.4);
+      padding:40px;
+      border-radius:20px;
+      text-align:center;
+      position:relative;
+      z-index:1;
+      backdrop-filter: blur(3px);
+    }
+
+    #image-container {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+      gap:25px;
+      margin-bottom:40px;
+      justify-items:center;
+    }
+    #image-container div {
+      width:150px; height:150px;
+      background: rgba(255,255,255,0.08);
+      border:2px solid rgba(255,255,255,0.25);
+      border-radius:15px; padding:10px;
+      cursor:pointer; transition:all 0.3s ease;
+      display:flex; align-items:center; justify-content:center;
+    }
+    #image-container div:hover {
+      transform:scale(1.05);
+      border-color:#00ffcc;
+      box-shadow:0 5px 15px rgba(0,255,204,0.25);
+    }
+    #image-container div.selected {
+      border:2px solid #00ffcc;
+      background:rgba(0,255,204,0.1);
+      box-shadow:0 0 10px rgba(0,255,204,0.3);
+      animation: softPulse 3s infinite ease-in-out;
+    }
+    @keyframes softPulse {
+      0%,100% { box-shadow: 0 0 10px rgba(0,255,204,0.25); }
+      50% { box-shadow: 0 0 16px rgba(0,255,204,0.35); }
+    }
+
+    #image-container img {
+      width:100%; height:100%; object-fit:cover; border-radius:10px;
+    }
+
+    form { display:flex; flex-direction:column; align-items:center; gap:20px; }
+    input[type="text"] {
+      width:100%; max-width:400px; padding:14px; border-radius:10px; border:none;
+      font-size:16px; background: rgba(255,255,255,0.15); color:#fff; outline:none; transition:all 0.3s ease;
+    }
+    input[type="text"]:focus {
+      box-shadow:0 0 12px rgba(0,255,204,0.4);
+      border:1px solid #00ffcc;
+    }
+    #display-sequence { font-weight:600; font-size:18px; color:#00ffcc; min-height:24px; letter-spacing:1px; }
+
+    #submit-btn, #reset-btn {
+      background:#00ffcc; color:#111;
+      padding:14px 32px; font-size:18px; font-weight:600;
+      border:none; border-radius:30px; cursor:pointer;
+      transition:all 0.3s ease; margin: 0 10px;
+    }
+    #submit-btn:hover:not(:disabled) {
+      box-shadow:0 0 16px rgba(0,255,204,0.6);
+      transform:translateY(-3px);
+    }
+    #submit-btn:disabled {
+      background:rgba(255,255,255,0.3);
+      color:rgba(0,0,0,0.5);
+      cursor:not-allowed;
+    }
+    #reset-btn {
+      background: rgba(255, 69, 58, 0.9);
+      color: #fff;
+    }
+    #reset-btn:hover {
+      background: rgba(255, 69, 58, 1);
+      box-shadow: 0 0 10px rgba(255, 69, 58, 0.7);
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <h1>Register Password</h1>
+    <div>
+      <button onclick="location.href='/home'">Home</button>
+      <button onclick="window.location.href='/login?theme=' + (localStorage.getItem('selectedTheme') || '{{ theme }}')">Login</button>
+    </div>
+  </nav>
+
+  <h1 class="page-heading">🎨 Choose Your Secret Pattern 🎨</h1>
+  <p class="page-subtitle">
+    Click on <span class="highlight">three</span> images in the sequence you want to use as your password.
+  </p>
+
+  <div class="container">
+    <div id="image-container">
+      {% for img in images %}
+      <!-- ✅ Use real image IDs -->
+      <div data-id="{{ img[0] }}" onclick="selectImage(this)">
+        <img src="{{ url_for('serve_templates_file', filename=img[1]) }}" alt="Image {{ img[0] }}">
+      </div>
+      {% endfor %}
+    </div>
+
+    <form method="POST">
+      <input type="hidden" name="theme" id="theme" value="{{ theme }}">
+      <input type="text" id="username" name="username" placeholder="Create your username" required />
+      <input type="hidden" id="sequence" name="sequence" required>
+      <p>Selected Sequence: <span id="display-sequence"></span></p>
+      <div>
+        <button type="submit" id="submit-btn" disabled>Register</button>
+        <button type="button" id="reset-btn" onclick="resetSelection()">Reset</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const storedTheme = localStorage.getItem("selectedTheme");
+    if (storedTheme && !window.location.search.includes("theme=")) {
+      window.location.href = window.location.pathname + "?theme=" + storedTheme;
+    }
+    if (storedTheme) {
+      document.getElementById("theme").value = storedTheme;
+    }
+
+    let selectedSequence = [];
+    const MAX_SELECTION = 3;
+
+    function selectImage(element) {
+      if (selectedSequence.length < MAX_SELECTION && !element.classList.contains('selected')) {
+        const id = element.getAttribute('data-id'); // ✅ this now captures actual image ID
+        selectedSequence.push(id);
+        element.classList.add('selected');
+        document.getElementById('sequence').value = selectedSequence.join('-');
+        document.getElementById('display-sequence').textContent = selectedSequence.join(' ➝ ');
+        if (selectedSequence.length === MAX_SELECTION) {
+          document.getElementById('submit-btn').disabled = false;
+        }
+      }
+    }
+
+    function resetSelection() {
+      selectedSequence = [];
+      document.getElementById('sequence').value = '';
+      document.getElementById('display-sequence').textContent = '';
+      document.getElementById('submit-btn').disabled = true;
+      document.querySelectorAll('#image-container div').forEach(div => div.classList.remove('selected'));
+    }
+  </script>
+
+</body>
+</html>

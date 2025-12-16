@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Successful</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+
+    body {
+      min-height:100vh;
+      /* Repeating background from templates folder, clear & unblurred */
+      background: url("/templates/pic1.jpg") repeat center center;
+      background-size: auto;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      position:relative;
+    }
+
+    body::before {
+  content:"";
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.1); /* slight dark overlay */
+  backdrop-filter: blur(4px);   /* slight blur applied */
+  z-index:0;
+}
+
+
+    nav {
+      width:100%;
+      max-width:1200px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 12px;
+      padding:15px 30px;
+      display:flex;
+      justify-content:flex-start;
+      align-items:center;
+      box-shadow:0 0 10px rgba(0,255,204,0.25);
+      position:absolute;
+      top:20px;
+      z-index:1;
+    }
+
+    nav button {
+      padding:10px 25px;
+      font-size:16px;
+      border-radius:12px;
+      border:none;
+      cursor:pointer;
+      background:rgba(255,255,255,0.1);
+      color:#fff;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    nav button:hover {
+      background: rgba(0,255,204,0.35);
+      box-shadow:0 0 10px rgba(0,255,204,0.4);
+    }
+
+    .success-container {
+      position: relative;
+      z-index:1;
+      text-align:center;
+      background: rgba(255,255,255,0.05); /* soft transparent background */
+      padding:80px 60px;
+      border-radius:25px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px); /* slight blur for glass effect */
+      max-width:600px;
+      width:90%;
+    }
+
+    .tick-circle {
+      width:160px;
+      height:160px;
+      border-radius:50%;
+      background: rgba(0,255,204,0.15);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:0 auto 40px;
+      box-shadow:0 0 30px rgba(0,255,204,0.6);
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    .tick-circle::after {
+      content:"✔";
+      font-size:80px;
+      color:#00ffcc;
+      font-weight:700;
+    }
+
+    @keyframes pulse {
+      0%,100% { box-shadow:0 0 20px rgba(0,255,204,0.4); }
+      50% { box-shadow:0 0 35px rgba(0,255,204,0.7); }
+    }
+
+    .success-message {
+      font-size:32px;
+      font-weight:700;
+      color:#00ffcc;
+      margin-bottom:20px;
+    }
+
+    .success-submessage {
+      font-size:22px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    @media(max-width:600px){
+      .tick-circle { width:120px; height:120px; }
+      .tick-circle::after { font-size:60px; }
+      .success-message { font-size:26px; }
+      .success-submessage { font-size:18px; }
+      nav button { padding:8px 20px; font-size:14px; }
+      .success-container { padding:60px 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <button onclick="location.href='home'">Logout</button>
+  </nav>
+
+  <!-- Success Message -->
+  <div class="success-container">
+    <div class="tick-circle"></div>
+    <div class="success-message">Login Successful :)</div>
+    <div class="success-submessage">Thank you for logging in!</div>
+  </div>
+
+</body>
+</html>

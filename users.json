@@ -1,0 +1,29 @@
+{
+    "aashi": {
+        "password_hash": "d201a720020d893edd4e12b34da7e525653e43dd1e68ecf59a267d00740700f6",
+        "sequence": [
+            "3",
+            "4",
+            "1"
+        ],
+        "theme": "animals"
+    },
+    "BHOOMI_SB": {
+        "password_hash": "e7a8a1537915e1d998251682c796802a2a506ffb3d48610f729734d6ffa0b007",
+        "sequence": [
+            "3",
+            "4",
+            "6"
+        ],
+        "theme": "animals"
+    },
+    "shreya": {
+        "password_hash": "44854df2bf958d80b06140621fb0e98c2717aca17795324877d85dc6694fc389",
+        "sequence": [
+            "6",
+            "4",
+            "1"
+        ],
+        "theme": "animals"
+    }
+}

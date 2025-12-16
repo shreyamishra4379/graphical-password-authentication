@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verifying Graphical Password</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* 🌟 Global Styles */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+
+    body {
+      min-height:100vh;
+      background: url("{{ url_for('serve_templates_file', filename='pic1.jpg') }}") repeat center center;
+      background-size: auto;
+      display:flex; flex-direction:column; align-items:center; padding:40px 20px;
+      color:#fff; position:relative; overflow-x:hidden;
+    }
+
+    body::before {
+      content:""; position:absolute; top:0; left:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.6); z-index:0;
+    }
+
+    /* 🌟 Navbar */
+    nav {
+      width:100%; max-width:1200px;
+      background: rgba(0,0,0,0.55); border-radius:15px; padding:15px 30px;
+      display:flex; justify-content:space-between; align-items:center;
+      margin-bottom:40px; box-shadow:0 0 10px rgba(0,255,204,0.25); z-index:1;
+    }
+    nav h1 { font-size:28px; font-weight:700; color:#fff; }
+    nav button { padding:10px 25px; font-size:16px; border-radius:12px; border:none; cursor:pointer;
+      background:rgba(255,255,255,0.1); color:#fff; font-weight:600; transition:0.3s; }
+    nav button:hover { background: rgba(0,255,204,0.35); box-shadow:0 0 10px rgba(0,255,204,0.4); }
+
+    /* 🌟 Page Heading */
+    .page-heading { font-size:34px; text-align:center; font-weight:700; margin-bottom:10px;
+      color:#ffffff; text-shadow:0 0 6px rgba(0,255,204,0.7),0 0 12px rgba(0,255,204,0.6); position:relative; z-index:1; }
+    .page-subtitle { font-size:18px; margin-bottom:40px; color: #f0fdfa;
+      text-align:center; z-index:1; position:relative; }
+    .highlight { color:#00ffcc; font-weight:700; background: rgba(0,255,204,0.1); padding:2px 6px; border-radius:6px; }
+
+    /* 🌟 Main Container */
+    .container { 
+      width:100%; max-width:1100px; 
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(5px);
+      border:1px solid rgba(255,255,255,0.2); box-shadow:0 8px 25px rgba(0,0,0,0.4);
+      padding:40px; border-radius:20px; text-align:center; position:relative; z-index:1; 
+    }
+
+    /* 🌟 Image Grid */
+    #image-container { display:grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+      gap:25px; margin-bottom:40px; justify-items:center; }
+    #image-container div { width:150px; height:150px; background: rgba(255,255,255,0.08);
+      border:2px solid rgba(255,255,255,0.25); border-radius:15px; padding:10px;
+      cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.3s; }
+    #image-container div:hover { transform:scale(1.05); border-color:#00ffcc; box-shadow:0 5px 15px rgba(0,255,204,0.25);}
+    #image-container div.selected { border:2px solid #00ffcc; background: rgba(0,255,204,0.1);
+      box-shadow:0 0 10px rgba(0,255,204,0.3); animation: softPulse 3s infinite ease-in-out; }
+    @keyframes softPulse { 0%,100%{box-shadow:0 0 10px rgba(0,255,204,0.25);} 50%{box-shadow:0 0 16px rgba(0,255,204,0.35);} }
+    #image-container img { width:100%; height:100%; object-fit:cover; border-radius:10px; }
+
+    /* 🌟 Form */
+    form { display:flex; flex-direction:column; align-items:center; gap:20px; }
+    input[type="text"] { width:100%; max-width:400px; padding:14px; border-radius:10px; border:none;
+      font-size:16px; background: rgba(255,255,255,0.15); color:#fff; outline:none; transition:0.3s; }
+    input[type="text"]:focus { box-shadow:0 0 12px rgba(0,255,204,0.4); border:1px solid #00ffcc; }
+
+    #display-sequence { font-weight:600; font-size:18px; color:#00ffcc; min-height:24px; letter-spacing:1px; }
+
+    button { padding:14px 32px; font-size:18px; font-weight:600; border:none; border-radius:30px; cursor:pointer; transition:0.3s; }
+    #submit-btn { background:#00ffcc; color:#111; box-shadow:0 0 12px rgba(0,255,204,0.4); }
+    #submit-btn:hover:not(:disabled) { box-shadow:0 0 16px rgba(0,255,204,0.6); transform:translateY(-3px); }
+    #submit-btn:disabled { background: rgba(255,255,255,0.3); color: rgba(0,0,0,0.5); cursor:not-allowed; }
+
+    /* 🌟 Reset button in red */
+    button[type="button"] {
+      background: #ff4c4c; /* red color */
+      color: #fff;
+      margin-left:10px;
+      box-shadow: 0 0 10px rgba(255, 76, 76, 0.4);
+    }
+    button[type="button"]:hover {
+      background: #ff1a1a;
+      box-shadow: 0 0 15px rgba(255, 26, 26, 0.6);
+      transform:translateY(-2px);
+    }
+
+    @media(max-width:600px){ nav h1{font-size:20px;} #image-container{grid-template-columns:repeat(2,1fr);} }
+  </style>
+</head>
+<body>
+
+<nav>
+  <h1>Verify Password</h1>
+  <div>
+    <button onclick="location.href='/home'">Home</button>
+    <button onclick="location.href='/register'">Signup</button>
+  </div>
+</nav>
+
+<h1 class="page-heading">🔒 Enter Your Secret Pattern 🔒</h1>
+<p class="page-subtitle">
+  Click on <span class="highlight">three</span> images in the sequence you chose during registration.
+</p>
+
+<div class="container">
+  <div id="image-container">
+    {% for img in images %}
+      <div data-id="{{ img[0] }}" onclick="selectImage(this)">
+        <img src="{{ url_for('serve_templates_file', filename=img[1]) }}" alt="Image {{ loop.index }}">
+      </div>
+    {% endfor %}
+  </div>
+
+  <form method="POST">
+    <input type="hidden" id="theme" name="theme" value="{{ theme }}">
+    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+    <input type="hidden" id="sequence" name="sequence" required>
+    <p>Selected Sequence: <span id="display-sequence"></span></p>
+    <div>
+      <button type="submit" id="submit-btn" disabled>Verify</button>
+      <button type="button" onclick="resetSelection()">Reset</button>
+    </div>
+  </form>
+</div>
+
+<script>
+let selectedSequence = [];
+const MAX_SELECTION = 3;
+
+function selectImage(element){
+  if(selectedSequence.length < MAX_SELECTION && !element.classList.contains('selected')){
+    const id = element.getAttribute('data-id');
+    selectedSequence.push(id);
+    element.classList.add('selected');
+    document.getElementById('sequence').value = selectedSequence.join('-');
+    document.getElementById('display-sequence').textContent = selectedSequence.join(' ➝ ');
+    if(selectedSequence.length === MAX_SELECTION){
+      document.getElementById('submit-btn').disabled = false;
+    }
+  }
+}
+
+function resetSelection(){
+  selectedSequence = [];
+  document.getElementById('sequence').value = '';
+  document.getElementById('display-sequence').textContent = '';
+  document.getElementById('submit-btn').disabled = true;
+  document.querySelectorAll('#image-container div').forEach(div => div.classList.remove('selected'));
+}
+</script>
+
+</body>
+</html>

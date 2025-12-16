@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Glassmorphism Sign-Up Page</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --accent: #00ffcc;
+      --glass-bg: rgba(25, 25, 25, 0.65); /* darker box */
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --input-bg: rgba(255, 255, 255, 0.15);
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: url("/templates/pic1.jpg") repeat center center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      color: var(--white);
+    }
+
+    /* 🔹 Top Navbar */
+    .top-bar {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 12px 25px;
+      gap: 20px;
+      margin-bottom: 30px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .nav-text {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      transition: color 0.2s ease;
+    }
+
+    .nav-text:hover {
+      color: var(--accent);
+    }
+
+    .nav-btn {
+      padding: 8px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.12s ease, filter 0.12s ease;
+    }
+
+    .login-btn {
+      background: var(--white);
+      color: #111;
+    }
+
+    .signup-btn {
+      background: var(--accent);
+      color: #111;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    /* 🔹 Signup Box Layout */
+    .signup-box {
+      display: flex;
+      gap: 35px;
+      background: var(--glass-bg); /* darker box background */
+      border-radius: 20px;
+      padding: 60px 50px; /* increased padding for taller box */
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 14px 45px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      max-width: 950px;
+      width: 100%;
+      min-height: 650px; /* increased height */
+      align-items: center;
+      justify-content: center;
+    }
+
+    .signup-left img {
+      width: 300px;
+      max-width: 100%;
+      border-radius: 16px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .signup-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .signup-right h2 {
+      font-size: 34px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 14px 45px 14px 18px;
+      border-radius: 30px;
+      border: none;
+      background: var(--input-bg);
+      color: #fff;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .input-group input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .input-group .icon {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 18px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 30px;
+      background: var(--white);
+      color: #111;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.12s ease, filter 0.12s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(0.95);
+    }
+
+    .login-link {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    .login-link a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 700px) {
+      .signup-box {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 25px;
+        min-height: auto;
+      }
+
+      .signup-left img {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 🔹 Top Navbar -->
+  <div class="top-bar">
+    <a href="/home" class="nav-text">Home</a>
+    <a href="/contact" class="nav-text">Contact</a>
+    <a href="/login1" class="nav-btn login-btn">Login</a>
+    <a href="/signup" class="nav-btn signup-btn">Sign Up</a>
+  </div>
+
+  <!-- 🔹 Signup Section -->
+  <div class="signup-box" role="main">
+    <div class="signup-left">
+      <img src="/templates/2.webp" alt="Signup Illustration">
+    </div>
+
+    <div class="signup-right">
+  <p style="font-weight: 700; font-size: 30px; text-align: center; margin-bottom: 8px;">
+    Join us today :)
+  </p>
+  <h2>Create Account</h2>
+
+  <form action="/signup" method="POST">
+    <div class="input-group">
+      <input name="fullname" type="text" placeholder="Full Name" autocomplete="name" required />
+      <i class="fa fa-user icon"></i>
+    </div>
+
+    <div class="input-group">
+      <input name="email" type="email" placeholder="Email" autocomplete="email" required />
+      <i class="fa fa-envelope icon"></i>
+    </div>
+
+    <div class="input-group">
+      <input id="password" name="password" type="password" placeholder="Password" autocomplete="current-password" required />
+      <i class="fa fa-eye icon" id="togglePassword" style="cursor:pointer;"></i>
+    </div>
+
+    <button class="btn" type="submit">Create Account</button>
+  </form>
+
+  <div class="login-link">
+    Already have an account? <a href="/login1">Login here</a>
+  </div>
+</div>
+
+<script>
+  const togglePassword = document.querySelector('#togglePassword');
+  const password = document.querySelector('#password');
+
+  togglePassword.addEventListener('click', function () {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+
+    // toggle the eye / eye-slash icon
+    this.classList.toggle('fa-eye-slash');
+  });
+</script>
+
+</body>
+</html>
